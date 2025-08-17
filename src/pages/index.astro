@@ -181,17 +181,33 @@ import '../styles/global.css';
 			function setTheme(theme) {
 				const html = document.documentElement;
 				
+				console.log('Setting theme to:', theme);
+				
 				// Remove all theme classes and attributes
-				html.classList.remove('dark');
+				html.classList.remove('dark', 'light', 'blueprint');
 				html.removeAttribute('data-theme');
+				
+				// Force a reflow to ensure changes are applied
+				html.offsetHeight;
 				
 				// Apply new theme
 				if (theme === 'dark') {
 					html.classList.add('dark');
 					html.setAttribute('data-theme', 'dark');
+					// Force background color
+					html.style.backgroundColor = '#0f172a';
+					html.style.color = '#f1f5f9';
 				} else {
 					html.setAttribute('data-theme', theme);
+					html.classList.add(theme);
+					// Reset inline styles for other themes
+					html.style.backgroundColor = '';
+					html.style.color = '';
 				}
+				
+				console.log('HTML classes:', html.className);
+				console.log('Data theme:', html.getAttribute('data-theme'));
+				console.log('Background color:', getComputedStyle(html).backgroundColor);
 				
 				// Update button states
 				updateThemeButtons(theme);
@@ -205,12 +221,13 @@ import '../styles/global.css';
 				buttons.forEach(theme => {
 					const button = document.getElementById(`theme-${theme}`);
 					if (button) {
+						// Reset button classes
+						button.className = 'inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible industrial-border relative overflow-hidden steel-panel px-6 py-3';
+						
 						if (theme === activeTheme) {
-							button.className = button.className.replace(/variant-\w+/, '');
-							button.className += ' steel-panel px-6 py-3 font-medium text-blueprint-700 bg-blueprint-50 industrial-border';
+							button.className += ' font-medium text-blueprint-700 bg-blueprint-50 border-blueprint-300';
 						} else {
-							button.className = button.className.replace(/steel-panel.*?industrial-border/, '');
-							button.className += ' steel-panel px-6 py-3 font-medium text-steel-700 hover:bg-steel-100 industrial-border';
+							button.className += ' font-medium text-steel-700 hover:bg-steel-100 border-steel-300';
 						}
 					}
 				});
@@ -219,6 +236,7 @@ import '../styles/global.css';
 			// Initialize theme on page load
 			function initTheme() {
 				const savedTheme = localStorage.getItem('iron-foundry-theme') || 'blueprint';
+				console.log('Initializing theme:', savedTheme); // Debug log
 				setTheme(savedTheme);
 			}
 			

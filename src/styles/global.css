@@ -134,17 +134,20 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-family-technical);
-  @apply bg-steel-50 text-steel-900 transition-colors duration-300;
+  @apply bg-steel-50 text-steel-900 transition-colors duration-300 min-h-screen;
 }
 
 body {
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "zero" 1;
   @apply min-h-screen;
+  background: inherit;
 }
 
-/* Dark theme */
+/* Dark theme - using !important to ensure it overrides */
 html.dark {
   @apply bg-steel-900 text-steel-50;
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
 }
 
 /* Focus styles for accessibility */
@@ -186,8 +189,23 @@ html.dark .focus-visible {
   @apply shadow-lg relative overflow-hidden;
 }
 
-.dark .steel-panel {
+html.dark .steel-panel {
   @apply from-steel-800 to-steel-900 border-steel-700;
+  background: linear-gradient(to bottom right, #1e293b, #0f172a) !important;
+  border-color: #334155 !important;
+}
+
+/* Dark theme text colors for steel panels */
+html.dark .steel-panel .text-steel-900 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .steel-panel .text-steel-700 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .steel-panel .text-steel-600 {
+  color: #94a3b8 !important;
 }
 
 .blueprint-grid {
