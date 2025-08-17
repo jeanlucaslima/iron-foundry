@@ -12,7 +12,7 @@ A powerful, industrial-themed Astro template for static websites. Built with per
 - **Blueprint Theme** - Technical drawing aesthetics with industrial blues
 - **Dark Theme** - Deep grays and steels with orange rust accents
 - **Light Theme** - Clean whites with industrial gray borders
-- Custom industrial components (rivets, steel panels, gears, blueprints)
+- Custom industrial components (steel panels, gears, blueprints)
 - Comprehensive icon library with custom foundry iconography
 
 ### 🌍 **Multi-language Support**
@@ -31,7 +31,7 @@ A powerful, industrial-themed Astro template for static websites. Built with per
 - **Notion-style TOC** with hover-expandable navigation
 
 ### 🧩 **UI Components**
-- **Cards** - Steel panel styling with riveted corners
+- **Cards** - Steel panel styling with clean industrial borders
 - **Badges** - Industrial label designs
 - **Avatars** - Circular with industrial border treatments
 - **Tooltips** - Factory callout box styling
@@ -131,7 +131,7 @@ iron-foundry/
 │   │   ├── layout/          # Header, Footer, Navigation
 │   │   ├── sections/        # Hero, Features, About, etc.
 │   │   ├── ui/             # Cards, Buttons, Badges, etc.
-│   │   ├── industrial/     # Rivets, Steel Panels, Gears
+│   │   ├── industrial/     # Steel Panels, Gears
 │   │   └── icons/          # Icon components
 │   ├── layouts/            # Page layouts
 │   ├── pages/              # Route pages

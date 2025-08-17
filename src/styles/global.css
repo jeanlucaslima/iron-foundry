@@ -64,17 +64,14 @@
   --animate-pulse-slow: pulse 3s ease-in-out infinite;
   
   /* Shadows and effects */
-  --shadow-rivet: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-steel: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-industrial: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   
   /* Spacing for industrial components */
-  --space-rivet: 8px;
   --space-panel: 16px;
   --space-section: 64px;
   
   /* Border radius for industrial elements */
-  --radius-rivet: 50%;
   --radius-panel: 4px;
   --radius-button: 6px;
 }
@@ -183,11 +180,6 @@ body {
 }
 
 /* Industrial utility classes */
-.rivet {
-  @apply relative rounded-full bg-gradient-to-br from-steel-300 to-steel-500;
-  box-shadow: var(--shadow-rivet);
-}
-
 .steel-panel {
   @apply bg-gradient-to-br from-steel-100 to-steel-200 border border-steel-300;
   @apply shadow-lg relative overflow-hidden;
@@ -208,17 +200,3 @@ body {
   @apply border-2 border-steel-300 relative;
 }
 
-.industrial-border::before,
-.industrial-border::after {
-  content: '';
-  @apply absolute w-2 h-2 bg-steel-500 rounded-full;
-  box-shadow: var(--shadow-rivet);
-}
-
-.industrial-border::before {
-  @apply top-2 left-2;
-}
-
-.industrial-border::after {
-  @apply bottom-2 right-2;
-}
