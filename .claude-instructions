@@ -1,0 +1,19 @@
+# Claude Code Instructions for Iron Foundry
+
+## Development Workflow
+- ALWAYS commit after completing each TODO task
+- Use atomic commits for each logical feature completion
+- Test changes before committing
+- Follow the commit message format: `feat/fix/docs: description`
+
+## Quality Gates
+- Ensure accessibility compliance (WCAG 2.1 AA)
+- Test responsive design across breakpoints
+- Validate industrial design aesthetic consistency
+- Check reduced motion support
+
+## Commit Triggers
+- ✅ TODO task marked as completed
+- 🧪 Feature tested and working
+- 📝 Documentation updated
+- 🎨 Industrial styling applied
