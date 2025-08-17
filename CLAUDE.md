@@ -84,6 +84,23 @@ Uses Tailwind CSS 4+ with the new `@theme` directive for defining custom design 
 4. **PWA Capabilities** - Service worker, offline support, desktop installation
 5. **SEO & Social** - Auto-generated OG images, structured data, XML sitemaps, RSS feeds
 
+### Development Workflow
+
+**Git Commit Guidelines:**
+- ALWAYS commit after completing each TODO task
+- Create atomic commits for logical feature completions
+- Use descriptive commit messages with the format: `feat/fix/docs: description`
+- Include the Claude Code footer in all commits
+- Never leave completed work uncommitted
+
+**Development Process:**
+1. Mark TODO as in_progress when starting
+2. Implement the feature completely
+3. Test the implementation
+4. Mark TODO as completed
+5. **IMMEDIATELY commit the work**
+6. Move to next TODO task
+
 ### Development Notes
 
 - The project is currently minimal with just basic Astro structure
