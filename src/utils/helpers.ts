@@ -9,6 +9,13 @@ export function getTranslation(key: string, lang: Language = SITE_CONFIG.default
 }
 
 /**
+ * Get current date for development purposes
+ */
+export function getCurrentDate(): Date {
+  return new Date();
+}
+
+/**
  * Format date for display
  */
 export function formatDate(date: Date, lang: Language = SITE_CONFIG.defaultLanguage): string {

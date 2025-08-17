@@ -1,7 +1,7 @@
 ---
 title: "Introducing Iron Foundry: Industrial-Strength Web Development"
 description: "A new Astro template that brings the precision and durability of industrial design to modern web development."
-publishDate: 2024-01-15
+publishDate: 2024-01-15T00:00:00.000Z
 tags: ["astro", "industrial-design", "web-development", "template"]
 category: "announcements"
 featured: true

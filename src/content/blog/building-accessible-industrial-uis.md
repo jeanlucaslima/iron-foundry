@@ -1,7 +1,7 @@
 ---
 title: "Building Accessible Industrial UIs"
 description: "How to create industrial-themed interfaces that work for everyone, combining aesthetic appeal with inclusive design principles."
-publishDate: 2024-01-22
+publishDate: 2024-01-22T00:00:00.000Z
 tags: ["accessibility", "ui-design", "wcag", "inclusive-design"]
 category: "design"
 featured: false
