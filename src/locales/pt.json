@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "blog": "Blog",
+    "contact": "Contato",
+    "language": "Idioma",
+    "theme": "Tema"
+  },
+  "hero": {
+    "title": "Desenvolvimento Web de Força Industrial",
+    "subtitle": "Construído para Durar, Projetado para Performance",
+    "description": "Iron Foundry entrega websites robustos e de alta performance com precisão de qualidade industrial. Cada componente forjado com acessibilidade, performance e padrões web modernos em mente.",
+    "cta": "Começar",
+    "cta_secondary": "Ver Documentação"
+  },
+  "features": {
+    "title": "Projetado para Excelência",
+    "subtitle": "Cada componente construído com precisão industrial",
+    "performance": {
+      "title": "Otimizado para Performance",
+      "description": "Core Web Vitals otimizados com carregamento lazy, CSS crítico e otimização de recursos"
+    },
+    "accessibility": {
+      "title": "Acessibilidade em Primeiro",
+      "description": "Compatível com WCAG 2.1 AA com navegação completa por teclado e suporte a leitor de tela"
+    },
+    "industrial": {
+      "title": "Design Industrial",
+      "description": "Estética única com rebites, painéis de aço, engrenagens e temas blueprint"
+    },
+    "responsive": {
+      "title": "Pronto para Mobile",
+      "description": "Design responsivo que funciona perfeitamente em todos os dispositivos e tamanhos de tela"
+    },
+    "themes": {
+      "title": "Múltiplos Temas",
+      "description": "Temas Blueprint, Escuro e Claro com alternância perfeita"
+    },
+    "i18n": {
+      "title": "Multi-idiomas",
+      "description": "Suporte integrado para inglês, francês e português"
+    }
+  },
+  "about": {
+    "title": "Sobre Iron Foundry",
+    "subtitle": "Onde o design industrial encontra o desenvolvimento web moderno"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights técnicos e notícias da indústria",
+    "read_more": "Ler Mais",
+    "reading_time": "min de leitura",
+    "published_on": "Publicado em",
+    "tags": "Tags",
+    "category": "Categoria",
+    "no_posts": "Nenhum post do blog encontrado."
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Entre em contato com nossa equipe de engenharia",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem",
+    "send": "Enviar Mensagem"
+  },
+  "footer": {
+    "environment": "Ambiente",
+    "status": {
+      "live": "LIVE",
+      "test": "TEST",
+      "dev": "DEV"
+    },
+    "copyright": "Construído com precisão industrial",
+    "powered_by": "Desenvolvido com Astro & Tailwind CSS"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "close": "Fechar",
+    "open": "Abrir",
+    "menu": "Menu",
+    "skip_to_content": "Pular para o conteúdo principal",
+    "back_to_top": "Voltar ao topo",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "page": "Página"
+  },
+  "themes": {
+    "blueprint": "Blueprint",
+    "dark": "Escuro",
+    "light": "Claro"
+  }
+}

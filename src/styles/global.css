@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@theme {
+  /* Blueprint theme colors */
+  --color-blueprint-50: #eff6ff;
+  --color-blueprint-100: #dbeafe;
+  --color-blueprint-200: #bfdbfe;
+  --color-blueprint-300: #93c5fd;
+  --color-blueprint-400: #60a5fa;
+  --color-blueprint-500: #3b82f6;
+  --color-blueprint-600: #2563eb;
+  --color-blueprint-700: #1d4ed8;
+  --color-blueprint-800: #1e40af;
+  --color-blueprint-900: #1e3a8a;
+  --color-blueprint-950: #172554;
+  
+  /* Industrial steel colors */
+  --color-steel-50: #f8fafc;
+  --color-steel-100: #f1f5f9;
+  --color-steel-200: #e2e8f0;
+  --color-steel-300: #cbd5e1;
+  --color-steel-400: #94a3b8;
+  --color-steel-500: #64748b;
+  --color-steel-600: #475569;
+  --color-steel-700: #334155;
+  --color-steel-800: #1e293b;
+  --color-steel-900: #0f172a;
+  --color-steel-950: #020617;
+  
+  /* Iron colors */
+  --color-iron-50: #f1f5f9;
+  --color-iron-100: #e2e8f0;
+  --color-iron-200: #cbd5e1;
+  --color-iron-300: #94a3b8;
+  --color-iron-400: #64748b;
+  --color-iron-500: #475569;
+  --color-iron-600: #334155;
+  --color-iron-700: #1e293b;
+  --color-iron-800: #0f172a;
+  --color-iron-900: #020617;
+  
+  /* Rust accent colors */
+  --color-rust-50: #fff7ed;
+  --color-rust-100: #ffedd5;
+  --color-rust-200: #fed7aa;
+  --color-rust-300: #fdba74;
+  --color-rust-400: #fb923c;
+  --color-rust-500: #f97316;
+  --color-rust-600: #ea580c;
+  --color-rust-700: #c2410c;
+  --color-rust-800: #9a3412;
+  --color-rust-900: #7c2d12;
+  --color-rust-950: #431407;
+  
+  /* Industrial fonts */
+  --font-family-industrial: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+  --font-family-technical: "Inter", system-ui, -apple-system, sans-serif;
+  --font-family-display: "Inter", system-ui, -apple-system, sans-serif;
+  
+  /* Custom animations */
+  --animate-gear-rotate: gear-rotate 10s linear infinite;
+  --animate-hydraulic: hydraulic 2s ease-in-out infinite;
+  --animate-shine: shine 2s ease-in-out infinite;
+  --animate-pulse-slow: pulse 3s ease-in-out infinite;
+  
+  /* Shadows and effects */
+  --shadow-rivet: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-steel: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-industrial: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  
+  /* Spacing for industrial components */
+  --space-rivet: 8px;
+  --space-panel: 16px;
+  --space-section: 64px;
+  
+  /* Border radius for industrial elements */
+  --radius-rivet: 50%;
+  --radius-panel: 4px;
+  --radius-button: 6px;
+}
+
+/* Dark theme overrides */
+.dark {
+  --color-steel-50: #020617;
+  --color-steel-100: #0f172a;
+  --color-steel-200: #1e293b;
+  --color-steel-300: #334155;
+  --color-steel-400: #475569;
+  --color-steel-500: #64748b;
+  --color-steel-600: #94a3b8;
+  --color-steel-700: #cbd5e1;
+  --color-steel-800: #e2e8f0;
+  --color-steel-900: #f1f5f9;
+  --color-steel-950: #f8fafc;
+}
+
+/* Theme variants */
+[data-theme="blueprint"] {
+  --color-primary-50: var(--color-blueprint-50);
+  --color-primary-500: var(--color-blueprint-500);
+  --color-primary-600: var(--color-blueprint-600);
+  --color-primary-900: var(--color-blueprint-900);
+}
+
+[data-theme="dark"] {
+  --color-primary-50: var(--color-rust-50);
+  --color-primary-500: var(--color-rust-500);
+  --color-primary-600: var(--color-rust-600);
+  --color-primary-900: var(--color-rust-900);
+}
+
+[data-theme="light"] {
+  --color-primary-50: var(--color-steel-50);
+  --color-primary-500: var(--color-steel-600);
+  --color-primary-600: var(--color-steel-700);
+  --color-primary-900: var(--color-steel-900);
+}
+
+/* Custom keyframe animations */
+@keyframes gear-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hydraulic {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-family-technical);
+}
+
+body {
+  @apply bg-steel-50 text-steel-900 transition-colors duration-300;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "zero" 1;
+}
+
+/* Dark theme body */
+.dark body {
+  @apply bg-steel-900 text-steel-50;
+}
+
+/* Focus styles for accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-blueprint-500 ring-offset-2 ring-offset-steel-50;
+}
+
+.dark .focus-visible {
+  @apply ring-offset-steel-900;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .gear-animation,
+  .hydraulic-animation,
+  .shine-animation {
+    animation: none !important;
+  }
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  @apply absolute -top-10 left-4 bg-steel-900 text-steel-50 px-4 py-2 rounded;
+  @apply focus:top-4 z-50 transition-all duration-200;
+}
+
+/* Industrial utility classes */
+.rivet {
+  @apply relative rounded-full bg-gradient-to-br from-steel-300 to-steel-500;
+  box-shadow: var(--shadow-rivet);
+}
+
+.steel-panel {
+  @apply bg-gradient-to-br from-steel-100 to-steel-200 border border-steel-300;
+  @apply shadow-lg relative overflow-hidden;
+}
+
+.dark .steel-panel {
+  @apply from-steel-800 to-steel-900 border-steel-700;
+}
+
+.blueprint-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.industrial-border {
+  @apply border-2 border-steel-300 relative;
+}
+
+.industrial-border::before,
+.industrial-border::after {
+  content: '';
+  @apply absolute w-2 h-2 bg-steel-500 rounded-full;
+  box-shadow: var(--shadow-rivet);
+}
+
+.industrial-border::before {
+  @apply top-2 left-2;
+}
+
+.industrial-border::after {
+  @apply bottom-2 right-2;
+}

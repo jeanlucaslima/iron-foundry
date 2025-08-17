@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "hero": {
+    "title": "Industrial Strength Web Development",
+    "subtitle": "Built to Last, Engineered for Performance",
+    "description": "Iron Foundry delivers robust, high-performance websites with industrial-grade precision. Every component forged with accessibility, performance, and modern web standards in mind.",
+    "cta": "Get Started",
+    "cta_secondary": "View Documentation"
+  },
+  "features": {
+    "title": "Engineered for Excellence",
+    "subtitle": "Every component built with industrial precision",
+    "performance": {
+      "title": "Performance Optimized",
+      "description": "Core Web Vitals optimized with lazy loading, critical CSS, and resource optimization"
+    },
+    "accessibility": {
+      "title": "Accessibility First",
+      "description": "WCAG 2.1 AA compliant with full keyboard navigation and screen reader support"
+    },
+    "industrial": {
+      "title": "Industrial Design",
+      "description": "Unique aesthetic with rivets, steel panels, gears, and blueprint themes"
+    },
+    "responsive": {
+      "title": "Mobile Ready",
+      "description": "Responsive design that works perfectly on all devices and screen sizes"
+    },
+    "themes": {
+      "title": "Multiple Themes",
+      "description": "Blueprint, Dark, and Light themes with seamless switching"
+    },
+    "i18n": {
+      "title": "Multi-language",
+      "description": "Built-in support for English, French, and Portuguese"
+    }
+  },
+  "about": {
+    "title": "About Iron Foundry",
+    "subtitle": "Where industrial design meets modern web development"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Technical insights and industry news",
+    "read_more": "Read More",
+    "reading_time": "min read",
+    "published_on": "Published on",
+    "tags": "Tags",
+    "category": "Category",
+    "no_posts": "No blog posts found."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our engineering team",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message"
+  },
+  "footer": {
+    "environment": "Environment",
+    "status": {
+      "live": "LIVE",
+      "test": "TEST",
+      "dev": "DEV"
+    },
+    "copyright": "Built with industrial precision",
+    "powered_by": "Powered by Astro & Tailwind CSS"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "open": "Open",
+    "menu": "Menu",
+    "skip_to_content": "Skip to main content",
+    "back_to_top": "Back to top",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page"
+  },
+  "themes": {
+    "blueprint": "Blueprint",
+    "dark": "Dark",
+    "light": "Light"
+  }
+}
