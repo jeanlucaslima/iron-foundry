@@ -190,13 +190,56 @@ const popularTags = [...new Set(allTags)].slice(0, 10);
     </main>
 
     <!-- Footer -->
-    <footer class="steel-panel mt-16 py-8 industrial-border">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <div class="flex items-center justify-center space-x-2 mb-4">
-          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span class="text-sm font-mono text-steel-600">DEV</span>
+    <footer class="steel-panel mt-16 py-12 industrial-border">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <!-- Navigation -->
+          <div>
+            <h3 class="text-lg font-semibold text-steel-900 mb-4 font-technical">Navigation</h3>
+            <ul class="space-y-2">
+              <li><a href="/" class="text-steel-600 hover:text-steel-900 transition-colors">Home</a></li>
+              <li><a href="/blog" class="text-steel-600 hover:text-steel-900 transition-colors">Blog</a></li>
+              <li><a href="/components" class="text-steel-600 hover:text-steel-900 transition-colors">Components</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h3 class="text-lg font-semibold text-steel-900 mb-4 font-technical">Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="https://github.com/yourusername/iron-foundry" class="text-steel-600 hover:text-steel-900 transition-colors">GitHub</a></li>
+              <li><a href="https://docs.astro.build" class="text-steel-600 hover:text-steel-900 transition-colors">Astro Docs</a></li>
+              <li><a href="https://tailwindcss.com" class="text-steel-600 hover:text-steel-900 transition-colors">Tailwind CSS</a></li>
+            </ul>
+          </div>
+
+          <!-- Community -->
+          <div>
+            <h3 class="text-lg font-semibold text-steel-900 mb-4 font-technical">Community</h3>
+            <ul class="space-y-2">
+              <li><a href="https://twitter.com/yourhandle" class="text-steel-600 hover:text-steel-900 transition-colors">Twitter</a></li>
+              <li><a href="https://linkedin.com/in/yourprofile" class="text-steel-600 hover:text-steel-900 transition-colors">LinkedIn</a></li>
+              <li><a href="https://github.com/yourusername/iron-foundry/discussions" class="text-steel-600 hover:text-steel-900 transition-colors">Discussions</a></li>
+            </ul>
+          </div>
+
+          <!-- Status -->
+          <div>
+            <h3 class="text-lg font-semibold text-steel-900 mb-4 font-technical">Status</h3>
+            <div class="flex items-center space-x-2 mb-4">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-sm font-mono text-steel-600">DEV</span>
+            </div>
+            <p class="text-steel-600 text-sm">All systems operational</p>
+          </div>
         </div>
-        <p class="text-steel-700">Industrial insights and technical excellence</p>
+
+        <div class="border-t border-steel-300 dark:border-steel-700 pt-8 text-center">
+          <p class="text-steel-700 mb-2">Built with machinery precision using Astro & Tailwind CSS</p>
+          <p class="text-steel-600 text-sm">
+            Created with ❤️ by <strong>Jean Lucas Lima</strong> & <strong>Claude</strong> in Brazil 🇧🇷
+          </p>
+        </div>
       </div>
     </footer>
   </body>
