@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE_CONFIG } from '../../utils/config';
+import { formatDate, calculateReadingTime } from '../../utils/helpers';
+import Logo from '../../components/icons/Logo.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import '../../styles/global.css';
+
+// Get all blog posts, sorted by date
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const featuredPosts = posts.filter(post => post.data.featured);
+const regularPosts = posts.filter(post => !post.data.featured);
+
+// Get unique categories and tags
+const categories = [...new Set(posts.map(post => post.data.category))];
+const allTags = posts.flatMap(post => post.data.tags);
+const popularTags = [...new Set(allTags)].slice(0, 10);
+---
+
+<html lang="en" data-theme="blueprint">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Blog - {SITE_CONFIG.title}</title>
+    <meta name="description" content="Technical insights, tutorials, and industry news from the Iron Foundry team." />
+  </head>
+  <body class="min-h-screen">
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="steel-panel p-6 industrial-border">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <Logo size="lg" />
+          <div>
+            <h1 class="text-2xl font-bold text-steel-900 font-technical">
+              Iron Foundry Blog
+            </h1>
+            <p class="text-steel-600 text-sm">Technical insights and industry news</p>
+          </div>
+        </div>
+        <Button href="/" variant="secondary" size="sm">
+          ← Back to Home
+        </Button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-6xl mx-auto p-6">
+      
+      <!-- Featured Posts -->
+      {featuredPosts.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Featured Posts</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            {featuredPosts.map((post) => (
+              <Card variant="elevated" class="h-full">
+                <Fragment slot="header">
+                  <div class="flex items-center justify-between mb-2">
+                    <Badge variant="primary">Featured</Badge>
+                    <Badge variant="secondary" size="sm">{post.data.category}</Badge>
+                  </div>
+                  <h3 class="text-xl font-bold text-steel-900">
+                    <a href={`/blog/${post.slug}`} class="hover:text-blueprint-600 transition-colors">
+                      {post.data.title}
+                    </a>
+                  </h3>
+                </Fragment>
+                
+                <p class="text-steel-700 mb-4">{post.data.description}</p>
+                
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {post.data.tags.slice(0, 3).map((tag) => (
+                    <Badge size="sm">{tag}</Badge>
+                  ))}
+                </div>
+                
+                <Fragment slot="footer">
+                  <div class="flex justify-between items-center text-sm text-steel-600">
+                    <span>By {post.data.author}</span>
+                    <div class="flex items-center space-x-4">
+                      <span>{formatDate(post.data.publishDate)}</span>
+                      <span>{calculateReadingTime(post.body)} min read</span>
+                    </div>
+                  </div>
+                </Fragment>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- All Posts -->
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold text-steel-900 font-technical">All Posts</h2>
+          <div class="flex items-center space-x-4">
+            <span class="text-steel-600 text-sm">{posts.length} posts</span>
+          </div>
+        </div>
+
+        {posts.length === 0 ? (
+          <Card class="text-center py-12">
+            <p class="text-steel-600 mb-4">No blog posts found.</p>
+            <Button href="/" variant="primary">Back to Home</Button>
+          </Card>
+        ) : (
+          <div class="space-y-6">
+            {regularPosts.map((post) => (
+              <Card variant="interactive" class="hover:shadow-industrial transition-shadow">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                  <div class="flex-1">
+                    <div class="flex items-center space-x-3 mb-2">
+                      <Badge variant="secondary" size="sm">{post.data.category}</Badge>
+                      <span class="text-steel-600 text-sm">{formatDate(post.data.publishDate)}</span>
+                      <span class="text-steel-600 text-sm">{calculateReadingTime(post.body)} min read</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-steel-900 mb-2">
+                      <a href={`/blog/${post.slug}`} class="hover:text-blueprint-600 transition-colors">
+                        {post.data.title}
+                      </a>
+                    </h3>
+                    
+                    <p class="text-steel-700 mb-3">{post.data.description}</p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-3">
+                      {post.data.tags.slice(0, 4).map((tag) => (
+                        <Badge size="sm">{tag}</Badge>
+                      ))}
+                    </div>
+                    
+                    <p class="text-steel-600 text-sm">By {post.data.author}</p>
+                  </div>
+                  
+                  <div class="mt-4 md:mt-0 md:ml-6">
+                    <Button href={`/blog/${post.slug}`} variant="ghost" size="sm">
+                      Read More →
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <!-- Sidebar Info -->
+      <section class="grid md:grid-cols-2 gap-8">
+        <!-- Categories -->
+        <Card>
+          <Fragment slot="header">
+            <h3 class="text-xl font-semibold text-steel-900">Categories</h3>
+          </Fragment>
+          <div class="space-y-2">
+            {categories.map((category) => {
+              const count = posts.filter(post => post.data.category === category).length;
+              return (
+                <div class="flex justify-between items-center py-2 border-b border-steel-200 dark:border-steel-700 last:border-b-0">
+                  <span class="text-steel-700 capitalize">{category}</span>
+                  <Badge size="sm">{count}</Badge>
+                </div>
+              );
+            })}
+          </div>
+        </Card>
+
+        <!-- Popular Tags -->
+        <Card>
+          <Fragment slot="header">
+            <h3 class="text-xl font-semibold text-steel-900">Popular Tags</h3>
+          </Fragment>
+          <div class="flex flex-wrap gap-2">
+            {popularTags.map((tag) => (
+              <Badge variant="secondary" size="sm">{tag}</Badge>
+            ))}
+          </div>
+        </Card>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="steel-panel mt-16 py-8 industrial-border">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="flex items-center justify-center space-x-2 mb-4">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span class="text-sm font-mono text-steel-600">DEV</span>
+        </div>
+        <p class="text-steel-700">Industrial insights and technical excellence</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,272 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { SITE_CONFIG } from '../../utils/config';
+import { formatDate, calculateReadingTime } from '../../utils/helpers';
+import Logo from '../../components/icons/Logo.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import '../../styles/global.css';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+};
+
+type Props = Awaited<ReturnType<typeof getCollection<'blog'>>>[number];
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+// Get related posts (same category, excluding current post)
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(p => p.data.category === post.data.category && p.slug !== post.slug && !p.data.draft)
+  .slice(0, 3);
+
+const readingTime = calculateReadingTime(post.body);
+---
+
+<html lang="en" data-theme="blueprint">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{post.data.title} - {SITE_CONFIG.title}</title>
+    <meta name="description" content={post.data.description} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={post.data.title} />
+    <meta property="og:description" content={post.data.description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={`${SITE_CONFIG.url}/blog/${post.slug}`} />
+    {post.data.heroImage && <meta property="og:image" content={post.data.heroImage} />}
+    
+    <!-- Article metadata -->
+    <meta property="article:published_time" content={post.data.publishDate.toISOString()} />
+    <meta property="article:author" content={post.data.author} />
+    <meta property="article:section" content={post.data.category} />
+    {post.data.tags.map(tag => <meta property="article:tag" content={tag} />)}
+  </head>
+  <body class="min-h-screen">
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="steel-panel p-6 industrial-border">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <Logo size="md" />
+          <div>
+            <h1 class="text-xl font-bold text-steel-900 font-technical">
+              Iron Foundry Blog
+            </h1>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <Button href="/blog" variant="secondary" size="sm">
+            ← All Posts
+          </Button>
+          <Button href="/" variant="ghost" size="sm">
+            Home
+          </Button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-4xl mx-auto p-6">
+      
+      <!-- Article Header -->
+      <article class="mb-16">
+        <header class="mb-8">
+          <!-- Breadcrumb -->
+          <nav class="text-sm text-steel-600 mb-4" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-steel-900">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/blog" class="hover:text-steel-900">Blog</a>
+            <span class="mx-2">/</span>
+            <span class="text-steel-900">{post.data.title}</span>
+          </nav>
+
+          <!-- Category and Featured Badge -->
+          <div class="flex items-center space-x-3 mb-4">
+            <Badge variant="primary">{post.data.category}</Badge>
+            {post.data.featured && <Badge variant="secondary">Featured</Badge>}
+          </div>
+
+          <!-- Title -->
+          <h1 class="text-4xl md:text-5xl font-bold text-steel-900 mb-4 font-technical leading-tight">
+            {post.data.title}
+          </h1>
+
+          <!-- Subtitle/Description -->
+          <p class="text-xl text-steel-700 mb-6 leading-relaxed">
+            {post.data.description}
+          </p>
+
+          <!-- Metadata -->
+          <div class="flex flex-wrap items-center gap-6 text-steel-600 mb-6">
+            <div class="flex items-center space-x-2">
+              <span class="font-medium">By {post.data.author}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span>{formatDate(post.data.publishDate)}</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span>{readingTime} min read</span>
+            </div>
+            {post.data.updatedDate && (
+              <div class="flex items-center space-x-2">
+                <span class="text-sm">Updated {formatDate(post.data.updatedDate)}</span>
+              </div>
+            )}
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <Badge size="sm">{tag}</Badge>
+            ))}
+          </div>
+        </header>
+
+        <!-- Hero Image -->
+        {post.data.heroImage && (
+          <div class="mb-8">
+            <img 
+              src={post.data.heroImage} 
+              alt={post.data.heroImageAlt || post.data.title}
+              class="w-full h-64 md:h-96 object-cover rounded-lg steel-panel"
+            />
+          </div>
+        )}
+
+        <!-- Article Content -->
+        <div class="prose prose-lg prose-steel max-w-none">
+          <Content />
+        </div>
+
+        <!-- Article Footer -->
+        <footer class="mt-12 pt-8 border-t border-steel-300 dark:border-steel-700">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+              <span class="text-steel-600">Share this post:</span>
+              <div class="flex items-center space-x-2">
+                <Button 
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`${SITE_CONFIG.url}/blog/${post.slug}`)}&text=${encodeURIComponent(post.data.title)}`}
+                  variant="ghost" 
+                  size="sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Twitter
+                </Button>
+                <Button 
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${SITE_CONFIG.url}/blog/${post.slug}`)}`}
+                  variant="ghost" 
+                  size="sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </Button>
+              </div>
+            </div>
+            <div class="text-steel-600 text-sm">
+              Published in <strong>{post.data.category}</strong>
+            </div>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section class="mb-16">
+          <h2 class="text-2xl font-bold text-steel-900 mb-6 font-technical">Related Posts</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            {relatedPosts.map((relatedPost) => (
+              <Card variant="interactive" class="h-full">
+                <Fragment slot="header">
+                  <Badge variant="secondary" size="sm">{relatedPost.data.category}</Badge>
+                  <h3 class="text-lg font-semibold text-steel-900 mt-2">
+                    <a href={`/blog/${relatedPost.slug}`} class="hover:text-blueprint-600 transition-colors">
+                      {relatedPost.data.title}
+                    </a>
+                  </h3>
+                </Fragment>
+                
+                <p class="text-steel-700 text-sm mb-4">{relatedPost.data.description}</p>
+                
+                <Fragment slot="footer">
+                  <div class="flex justify-between items-center text-xs text-steel-600">
+                    <span>{formatDate(relatedPost.data.publishDate)}</span>
+                    <span>{calculateReadingTime(relatedPost.body)} min read</span>
+                  </div>
+                </Fragment>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="steel-panel mt-16 py-8 industrial-border">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="flex items-center justify-center space-x-2 mb-4">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          <span class="text-sm font-mono text-steel-600">DEV</span>
+        </div>
+        <p class="text-steel-700">Industrial insights and technical excellence</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /* Custom prose styling for blog content */
+  .prose-steel {
+    --tw-prose-body: theme('colors.steel.700');
+    --tw-prose-headings: theme('colors.steel.900');
+    --tw-prose-lead: theme('colors.steel.600');
+    --tw-prose-links: theme('colors.blueprint.600');
+    --tw-prose-bold: theme('colors.steel.900');
+    --tw-prose-counters: theme('colors.steel.500');
+    --tw-prose-bullets: theme('colors.steel.400');
+    --tw-prose-hr: theme('colors.steel.300');
+    --tw-prose-quotes: theme('colors.steel.900');
+    --tw-prose-quote-borders: theme('colors.steel.300');
+    --tw-prose-captions: theme('colors.steel.600');
+    --tw-prose-code: theme('colors.steel.900');
+    --tw-prose-pre-code: theme('colors.steel.100');
+    --tw-prose-pre-bg: theme('colors.steel.800');
+    --tw-prose-th-borders: theme('colors.steel.300');
+    --tw-prose-td-borders: theme('colors.steel.200');
+  }
+
+  .dark .prose-steel {
+    --tw-prose-body: theme('colors.steel.300');
+    --tw-prose-headings: theme('colors.steel.100');
+    --tw-prose-lead: theme('colors.steel.400');
+    --tw-prose-links: theme('colors.blueprint.400');
+    --tw-prose-bold: theme('colors.steel.100');
+    --tw-prose-counters: theme('colors.steel.400');
+    --tw-prose-bullets: theme('colors.steel.500');
+    --tw-prose-hr: theme('colors.steel.600');
+    --tw-prose-quotes: theme('colors.steel.100');
+    --tw-prose-quote-borders: theme('colors.steel.600');
+    --tw-prose-captions: theme('colors.steel.400');
+    --tw-prose-code: theme('colors.steel.100');
+    --tw-prose-pre-code: theme('colors.steel.300');
+    --tw-prose-pre-bg: theme('colors.steel.800');
+    --tw-prose-th-borders: theme('colors.steel.600');
+    --tw-prose-td-borders: theme('colors.steel.700');
+  }
+</style>
