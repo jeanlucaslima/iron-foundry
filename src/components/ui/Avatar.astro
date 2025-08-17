@@ -1,0 +1,59 @@
+---
+export interface Props {
+  src?: string;
+  alt: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  fallback?: string;
+  class?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  size = 'md',
+  fallback,
+  class: className = '',
+  ...rest 
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-8 h-8 text-sm',
+  md: 'w-12 h-12 text-base',
+  lg: 'w-16 h-16 text-lg',
+  xl: 'w-24 h-24 text-xl'
+};
+
+const baseClasses = 'relative inline-flex items-center justify-center rounded-full border-2 border-steel-400 dark:border-steel-600 overflow-hidden bg-steel-200 dark:bg-steel-700';
+
+const classes = [
+  baseClasses,
+  sizeClasses[size],
+  className
+].filter(Boolean).join(' ');
+
+// Generate initials from alt text as fallback
+const initials = fallback || alt
+  .split(' ')
+  .map(word => word.charAt(0))
+  .join('')
+  .toUpperCase()
+  .slice(0, 2);
+---
+
+<div class={classes} {...rest}>
+  {src ? (
+    <img 
+      src={src} 
+      alt={alt}
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+  ) : (
+    <span class="font-semibold text-steel-600 dark:text-steel-300">
+      {initials}
+    </span>
+  )}
+  
+  <!-- Industrial rivet decoration -->
+  <div class="absolute -top-0.5 -right-0.5 rivet w-2 h-2 opacity-60" aria-hidden="true"></div>
+</div>

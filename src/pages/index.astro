@@ -2,6 +2,8 @@
 import { SITE_CONFIG } from '../utils/config';
 import Logo from '../components/icons/Logo.astro';
 import Gear from '../components/icons/Gear.astro';
+import Button from '../components/ui/Button.astro';
+import ArrowRight from '../components/icons/ArrowRight.astro';
 import '../styles/global.css';
 ---
 
@@ -49,12 +51,13 @@ import '../styles/global.css';
 				
 				<!-- Industrial CTA Buttons -->
 				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<button class="steel-panel px-8 py-3 font-semibold text-blueprint-700 hover:bg-blueprint-50 transition-all duration-200 industrial-border">
+					<Button variant="primary" size="lg">
 						Get Started
-					</button>
-					<button class="px-8 py-3 font-semibold text-steel-600 hover:text-steel-900 transition-colors duration-200">
-						View Documentation →
-					</button>
+					</Button>
+					<Button variant="ghost" size="lg" href="/components">
+						View Components
+						<ArrowRight class="ml-2" />
+					</Button>
 				</div>
 			</section>
 
@@ -93,24 +96,24 @@ import '../styles/global.css';
 					Multiple Themes Available
 				</h3>
 				<div class="flex justify-center space-x-4 mb-8">
-					<button 
+					<Button 
 						onclick="document.documentElement.setAttribute('data-theme', 'blueprint')"
-						class="steel-panel px-6 py-3 font-medium text-blueprint-700 industrial-border"
+						variant="primary"
 					>
 						Blueprint
-					</button>
-					<button 
+					</Button>
+					<Button 
 						onclick="document.documentElement.setAttribute('data-theme', 'dark')"
-						class="steel-panel px-6 py-3 font-medium text-steel-700 industrial-border"
+						variant="secondary"
 					>
 						Dark
-					</button>
-					<button 
+					</Button>
+					<Button 
 						onclick="document.documentElement.setAttribute('data-theme', 'light')"
-						class="steel-panel px-6 py-3 font-medium text-steel-700 industrial-border"
+						variant="secondary"
 					>
 						Light
-					</button>
+					</Button>
 				</div>
 				<p class="text-steel-600">Click the buttons above to test different themes!</p>
 			</section>

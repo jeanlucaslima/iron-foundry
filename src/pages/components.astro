@@ -1,0 +1,294 @@
+---
+import { SITE_CONFIG } from '../utils/config';
+import Logo from '../components/icons/Logo.astro';
+import Gear from '../components/icons/Gear.astro';
+import ArrowRight from '../components/icons/ArrowRight.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Progress from '../components/ui/Progress.astro';
+import Avatar from '../components/ui/Avatar.astro';
+import Tooltip from '../components/ui/Tooltip.astro';
+import '../styles/global.css';
+---
+
+<html lang="en" data-theme="blueprint">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>UI Components - {SITE_CONFIG.title}</title>
+    <meta name="description" content="Industrial UI components showcase" />
+  </head>
+  <body class="min-h-screen">
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="steel-panel p-6 industrial-border">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <Logo size="lg" />
+          <div>
+            <h1 class="text-2xl font-bold text-steel-900 font-technical">
+              UI Components
+            </h1>
+            <p class="text-steel-600 text-sm">Industrial-strength component library</p>
+          </div>
+        </div>
+        <Button href="/" variant="secondary" size="sm">
+          ← Back to Home
+        </Button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-6xl mx-auto p-6">
+      
+      <!-- Buttons Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Buttons</h2>
+        <div class="grid gap-8">
+          <!-- Button Variants -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Button Variants</h3>
+            </Fragment>
+            <div class="flex flex-wrap gap-4">
+              <Button variant="primary">Primary Button</Button>
+              <Button variant="secondary">Secondary Button</Button>
+              <Button variant="danger">Danger Button</Button>
+              <Button variant="ghost">Ghost Button</Button>
+            </div>
+          </Card>
+
+          <!-- Button Sizes -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Button Sizes</h3>
+            </Fragment>
+            <div class="flex flex-wrap items-center gap-4">
+              <Button size="sm">Small</Button>
+              <Button size="md">Medium</Button>
+              <Button size="lg">Large</Button>
+            </div>
+          </Card>
+
+          <!-- Button States -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Button States</h3>
+            </Fragment>
+            <div class="flex flex-wrap gap-4">
+              <Button>Normal</Button>
+              <Button loading>Loading</Button>
+              <Button disabled>Disabled</Button>
+              <Button href="#" variant="primary">Link Button</Button>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <!-- Cards Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Cards</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Default Card -->
+          <Card>
+            <h3 class="text-lg font-semibold text-steel-900 mb-2">Default Card</h3>
+            <p class="text-steel-700">This is a basic card with industrial styling and riveted corners.</p>
+          </Card>
+
+          <!-- Elevated Card -->
+          <Card variant="elevated">
+            <h3 class="text-lg font-semibold text-steel-900 mb-2">Elevated Card</h3>
+            <p class="text-steel-700">This card has enhanced shadow for more prominence.</p>
+          </Card>
+
+          <!-- Interactive Card -->
+          <Card variant="interactive">
+            <h3 class="text-lg font-semibold text-steel-900 mb-2">Interactive Card</h3>
+            <p class="text-steel-700">This card responds to hover with lift and shadow effects.</p>
+          </Card>
+
+          <!-- Card with Header and Footer -->
+          <Card class="md:col-span-3">
+            <Fragment slot="header">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-steel-900">Card with Header & Footer</h3>
+                <Badge variant="primary">Featured</Badge>
+              </div>
+            </Fragment>
+            <p class="text-steel-700 mb-4">
+              This card demonstrates the header and footer slots for more complex layouts.
+              The industrial design includes riveted corners and steel panel styling.
+            </p>
+            <Fragment slot="footer">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-steel-600">Last updated: Today</span>
+                <Button size="sm" variant="ghost">
+                  Learn More
+                  <ArrowRight class="ml-1" />
+                </Button>
+              </div>
+            </Fragment>
+          </Card>
+        </div>
+      </section>
+
+      <!-- Badges Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Badges</h2>
+        <div class="grid gap-8">
+          <!-- Badge Variants -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Badge Variants</h3>
+            </Fragment>
+            <div class="flex flex-wrap gap-3">
+              <Badge>Default</Badge>
+              <Badge variant="primary">Primary</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+              <Badge variant="danger">Danger</Badge>
+            </div>
+          </Card>
+
+          <!-- Badge Sizes -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Badge Sizes</h3>
+            </Fragment>
+            <div class="flex flex-wrap items-center gap-3">
+              <Badge size="sm" variant="primary">Small</Badge>
+              <Badge size="md" variant="primary">Medium</Badge>
+              <Badge size="lg" variant="primary">Large</Badge>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <!-- Progress Bars Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Progress Bars</h2>
+        <div class="grid gap-8">
+          <!-- Progress Variants -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Progress Colors</h3>
+            </Fragment>
+            <div class="space-y-4">
+              <Progress value={75} color="blueprint" label="Blueprint Progress" showValue />
+              <Progress value={60} color="rust" label="Rust Progress" showValue />
+              <Progress value={90} color="success" label="Success Progress" showValue />
+              <Progress value={45} color="warning" label="Warning Progress" showValue />
+              <Progress value={25} color="danger" label="Danger Progress" showValue />
+            </div>
+          </Card>
+
+          <!-- Progress Sizes -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Progress Sizes</h3>
+            </Fragment>
+            <div class="space-y-4">
+              <Progress value={65} size="sm" label="Small Progress" />
+              <Progress value={65} size="md" label="Medium Progress" />
+              <Progress value={65} size="lg" label="Large Progress" />
+            </div>
+          </Card>
+
+          <!-- Animated Progress -->
+          <Card>
+            <Fragment slot="header">
+              <h3 class="text-xl font-semibold text-steel-900">Animated Progress</h3>
+            </Fragment>
+            <Progress value={80} animated color="blueprint" label="Molten Metal Effect" showValue />
+          </Card>
+        </div>
+      </section>
+
+      <!-- Avatars Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Avatars</h2>
+        <Card>
+          <Fragment slot="header">
+            <h3 class="text-xl font-semibold text-steel-900">Avatar Sizes</h3>
+          </Fragment>
+          <div class="flex flex-wrap items-center gap-6">
+            <Avatar alt="John Smith" size="sm" />
+            <Avatar alt="Jane Doe" size="md" />
+            <Avatar alt="Iron Foundry" size="lg" />
+            <Avatar alt="Industrial Engineer" size="xl" />
+          </div>
+        </Card>
+      </section>
+
+      <!-- Tooltips Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">Tooltips</h2>
+        <Card>
+          <Fragment slot="header">
+            <h3 class="text-xl font-semibold text-steel-900">Tooltip Positions</h3>
+          </Fragment>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <Tooltip content="This tooltip appears on top" position="top">
+              <Button variant="secondary">Top Tooltip</Button>
+            </Tooltip>
+            <Tooltip content="This tooltip appears on the right" position="right">
+              <Button variant="secondary">Right Tooltip</Button>
+            </Tooltip>
+            <Tooltip content="This tooltip appears on the bottom" position="bottom">
+              <Button variant="secondary">Bottom Tooltip</Button>
+            </Tooltip>
+            <Tooltip content="This tooltip appears on the left" position="left">
+              <Button variant="secondary">Left Tooltip</Button>
+            </Tooltip>
+          </div>
+        </Card>
+      </section>
+
+      <!-- Theme Demo -->
+      <section class="py-16 text-center">
+        <h2 class="text-3xl font-bold text-steel-900 mb-8 font-technical">
+          Test Different Themes
+        </h2>
+        <div class="flex justify-center space-x-4 mb-8">
+          <Button 
+            onclick="document.documentElement.setAttribute('data-theme', 'blueprint')"
+            variant="primary"
+          >
+            Blueprint
+          </Button>
+          <Button 
+            onclick="document.documentElement.setAttribute('data-theme', 'dark')"
+            variant="secondary"
+          >
+            Dark
+          </Button>
+          <Button 
+            onclick="document.documentElement.setAttribute('data-theme', 'light')"
+            variant="secondary"
+          >
+            Light
+          </Button>
+        </div>
+        <p class="text-steel-600">Switch themes to see how all components adapt!</p>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="steel-panel mt-16 py-8 industrial-border">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="flex items-center justify-center space-x-2 mb-4">
+          <div class="rivet w-2 h-2 bg-green-500"></div>
+          <span class="text-sm font-mono text-steel-600">DEV</span>
+        </div>
+        <p class="text-steel-700">Industrial UI Components - Built with precision</p>
+      </div>
+    </footer>
+  </body>
+</html>

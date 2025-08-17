@@ -1,0 +1,55 @@
+---
+export interface Props {
+  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  variant = 'default', 
+  size = 'md',
+  class: className = '',
+  ...rest 
+} = Astro.props;
+
+const baseClasses = 'inline-flex items-center font-medium border transition-colors duration-200';
+
+const variantClasses = {
+  default: 'bg-steel-100 text-steel-800 border-steel-300 dark:bg-steel-800 dark:text-steel-200 dark:border-steel-600',
+  primary: 'bg-blueprint-100 text-blueprint-800 border-blueprint-300 dark:bg-blueprint-900 dark:text-blueprint-200 dark:border-blueprint-600',
+  secondary: 'bg-iron-100 text-iron-800 border-iron-300 dark:bg-iron-800 dark:text-iron-200 dark:border-iron-600',
+  success: 'bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:text-green-200 dark:border-green-600',
+  warning: 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-900 dark:text-amber-200 dark:border-amber-600',
+  danger: 'bg-rust-100 text-rust-800 border-rust-300 dark:bg-rust-900 dark:text-rust-200 dark:border-rust-600'
+};
+
+const sizeClasses = {
+  sm: 'px-2 py-0.5 text-xs rounded',
+  md: 'px-2.5 py-1 text-sm rounded-md',
+  lg: 'px-3 py-1.5 text-base rounded-lg'
+};
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  className
+].filter(Boolean).join(' ');
+---
+
+<span class={classes} {...rest}>
+  <!-- Optional icon slot -->
+  {Astro.slots.icon && (
+    <span class="mr-1 -ml-1">
+      <slot name="icon" />
+    </span>
+  )}
+  
+  <!-- Badge content -->
+  <slot />
+  
+  <!-- Industrial rivet decoration for larger badges -->
+  {size !== 'sm' && (
+    <span class="ml-1 rivet w-1.5 h-1.5 opacity-50" aria-hidden="true"></span>
+  )}
+</span>

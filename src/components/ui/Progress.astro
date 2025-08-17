@@ -1,0 +1,120 @@
+---
+export interface Props {
+  value: number; // 0-100
+  max?: number;
+  color?: 'blueprint' | 'rust' | 'steel' | 'success' | 'warning' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  animated?: boolean;
+  label?: string;
+  showValue?: boolean;
+  class?: string;
+}
+
+const { 
+  value, 
+  max = 100,
+  color = 'blueprint',
+  size = 'md',
+  animated = false,
+  label,
+  showValue = false,
+  class: className = '',
+  ...rest 
+} = Astro.props;
+
+const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
+
+const baseClasses = 'steel-panel border industrial-border relative overflow-hidden';
+
+const sizeClasses = {
+  sm: 'h-2',
+  md: 'h-4',
+  lg: 'h-6'
+};
+
+const colorClasses = {
+  blueprint: 'bg-gradient-to-r from-blueprint-500 to-blueprint-600',
+  rust: 'bg-gradient-to-r from-rust-500 to-rust-600', 
+  steel: 'bg-gradient-to-r from-steel-500 to-steel-600',
+  success: 'bg-gradient-to-r from-green-500 to-green-600',
+  warning: 'bg-gradient-to-r from-amber-500 to-amber-600',
+  danger: 'bg-gradient-to-r from-red-500 to-red-600'
+};
+
+const classes = [
+  baseClasses,
+  sizeClasses[size],
+  className
+].filter(Boolean).join(' ');
+
+const fillClasses = [
+  'h-full transition-all duration-500 ease-out relative',
+  colorClasses[color],
+  animated && 'overflow-hidden'
+].filter(Boolean).join(' ');
+---
+
+<div class="w-full" {...rest}>
+  <!-- Label and Value Display -->
+  {(label || showValue) && (
+    <div class="flex justify-between items-center mb-2">
+      {label && (
+        <span class="text-sm font-medium text-steel-700 dark:text-steel-300">
+          {label}
+        </span>
+      )}
+      {showValue && (
+        <span class="text-sm font-mono text-steel-600 dark:text-steel-400">
+          {Math.round(percentage)}%
+        </span>
+      )}
+    </div>
+  )}
+  
+  <!-- Progress Bar Container -->
+  <div class={classes} role="progressbar" aria-valuenow={value} aria-valuemax={max}>
+    <!-- Progress Fill -->
+    <div 
+      class={fillClasses}
+      style={`width: ${percentage}%`}
+    >
+      <!-- Molten metal shine effect for animated bars -->
+      {animated && (
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -skew-x-12 animate-shine" aria-hidden="true"></div>
+      )}
+      
+      <!-- Industrial texture overlay -->
+      <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);" aria-hidden="true"></div>
+    </div>
+    
+    <!-- Industrial progress indicators (rivets along the track) -->
+    {size !== 'sm' && (
+      <>
+        <div class="absolute top-1/2 left-2 transform -translate-y-1/2 rivet w-1 h-1 opacity-40" aria-hidden="true"></div>
+        <div class="absolute top-1/2 right-2 transform -translate-y-1/2 rivet w-1 h-1 opacity-40" aria-hidden="true"></div>
+      </>
+    )}
+  </div>
+  
+  <!-- Screen reader progress text -->
+  <span class="sr-only">
+    {label && `${label}: `}{Math.round(percentage)}% complete
+  </span>
+</div>
+
+<style>
+  @keyframes shine {
+    0% { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+  }
+  
+  .animate-shine {
+    animation: shine 2s ease-in-out infinite;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .animate-shine {
+      animation: none;
+    }
+  }
+</style>
