@@ -134,15 +134,16 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-family-technical);
+  @apply bg-steel-50 text-steel-900 transition-colors duration-300;
 }
 
 body {
-  @apply bg-steel-50 text-steel-900 transition-colors duration-300;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "zero" 1;
+  @apply min-h-screen;
 }
 
-/* Dark theme body */
-.dark body {
+/* Dark theme */
+html.dark {
   @apply bg-steel-900 text-steel-50;
 }
 
@@ -151,7 +152,7 @@ body {
   @apply outline-none ring-2 ring-blueprint-500 ring-offset-2 ring-offset-steel-50;
 }
 
-.dark .focus-visible {
+html.dark .focus-visible {
   @apply ring-offset-steel-900;
 }
 
